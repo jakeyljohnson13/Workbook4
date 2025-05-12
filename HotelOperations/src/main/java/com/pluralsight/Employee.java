@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
+
 public class Employee {
     private int employeeID;
     private String name;
@@ -87,5 +89,29 @@ public class Employee {
         System.out.println(name + "punched out at " + timeOut);
         hoursWorked += timeOut - timeIn;
         System.out.println(name + "'s total hours worked so far is " + hoursWorked);
+    }
+    LocalDateTime now = LocalDateTime.now();
+    int inHour;
+    int inMinute;
+    int outHour;
+    int outMinute;
+    public void punchIn(){
+        inHour = now.getHour();
+        inMinute = now.getMinute();
+        System.out.println(name + "has punched in at " + inHour + ":" + inMinute);
+    }
+    public void punchOut(){
+        outHour = now.getHour();
+        outMinute = now.getMinute();
+        if (inHour != 0 && inMinute != 0){
+            System.out.println(name + " has punched out at " + outHour + ":" + outMinute);
+            double hoursOfDay = (outHour - inHour) + ((outMinute)/60 + (inMinute)/60);
+            hoursWorked +=  hoursOfDay;
+            System.out.println("Hours worked today: " + hoursOfDay);
+            System.out.println("Total hours: " + hoursWorked);
+            inHour = 0;
+            inMinute = 0;
+        }
+        else System.out.println("Not punched in.");
     }
 }
