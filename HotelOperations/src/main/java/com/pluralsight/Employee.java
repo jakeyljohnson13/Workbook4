@@ -59,7 +59,7 @@ public class Employee {
     }
 
     public double getRegularHours(){
-        double regularHours;
+        double regularHours = 0.0;
         if (hoursWorked <= 40.0){
             regularHours = hoursWorked;
         } else if (hoursWorked > 40.0) {
@@ -81,14 +81,21 @@ public class Employee {
         return  totalPay;
     }
     double timeIn;
-    public double punchIn(double timeIn){
-        System.out.println(name + "punched in at " + timeIn);
-        return timeIn;
+    double timeOut;
+    public void punchIn(double timeIn){
+        this.timeIn = timeIn;
+        System.out.println(name + " punched in at " + timeIn);
     }
+    double hoursOfDay = 0.0;
     public void punchOut(double timeOut){
-        System.out.println(name + "punched out at " + timeOut);
-        hoursWorked += timeOut - timeIn;
+        this.timeOut = timeOut;
+        System.out.println(name + " punched out at " + timeOut);
+        hoursOfDay = timeOut - timeIn;
+        hoursWorked += hoursOfDay;
+        System.out.println("Today's total hours " + hoursOfDay);
         System.out.println(name + "'s total hours worked so far is " + hoursWorked);
+        timeIn = 0.0;
+        timeOut= 0.0;
     }
     LocalDateTime now = LocalDateTime.now();
     int inHour;
@@ -105,7 +112,7 @@ public class Employee {
         outMinute = now.getMinute();
         if (inHour != 0 && inMinute != 0){
             System.out.println(name + " has punched out at " + outHour + ":" + outMinute);
-            double hoursOfDay = (outHour - inHour) + ((outMinute)/60 + (inMinute)/60);
+            hoursOfDay = (outHour - inHour) + ((outMinute)/60 + (inMinute)/60);
             hoursWorked +=  hoursOfDay;
             System.out.println("Hours worked today: " + hoursOfDay);
             System.out.println("Total hours: " + hoursWorked);
