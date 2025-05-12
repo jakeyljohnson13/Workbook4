@@ -54,4 +54,16 @@ public class Room {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
+    public void checkIn(Room room){
+        isDirty = true;
+        isOccupied = true;
+        isAvailable = false;
+    }
+    public void checkOut(Room room){
+        isOccupied = false;
+    }
+    public void cleanRoom(Room room){
+        isDirty = false;
+        isAvailable = true;
+    }
 }
